@@ -6,6 +6,7 @@ import { getAllQuotes, addQuote } from "./functions.js";
 const app = express();
 
 app.use(express.json());
+app.use(cors);
 
 app.get("/all-quotes", getAllQuotes);
 app.post("/add-quote", addQuote);

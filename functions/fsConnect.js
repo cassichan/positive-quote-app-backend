@@ -1,6 +1,6 @@
 import { initializeApp, cert, getApps } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
-import { credentials } from "../credentials.js";
+import { credentials } from "./credentials.js";
 
 export function fsConnect() {
   if (!getApps().length) {
