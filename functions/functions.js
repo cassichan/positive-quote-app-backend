@@ -10,8 +10,26 @@ export function getAllQuotes(req, res) {
   db.collection("quotes")
     .get()
     .then((collection) => {
-      const quotes = collection.docs.map((doc) => doc.data());
+      const quotes = collection.docs.map((doc) => {
+        let quote = doc.data();
+        quote.id = doc.id
+        return quote
+      });
+
       res.send(quotes);
+    })
+    .catch((err) => handleError(err, res));
+}
+
+export function getOneQuote(req, res) {
+  const db = fsConnect();
+  db.collection("quotes")
+    .doc(req.params.quoteId)
+    .get()
+    .then((quote) => {
+      let thisQuote = quote.data();
+      thisQuote.id = quote.id;
+      res.send(quote);
     })
     .catch((err) => handleError(err, res));
 }
